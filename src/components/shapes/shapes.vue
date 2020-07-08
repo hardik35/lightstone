@@ -77,10 +77,10 @@ export default {
   methods: {
     assignShapeInfo(shapeInfo, event) {
       this.currentActiveShapeInfo.name = shapeInfo.name;
-      this.currentActiveShapeInfo.coordinates.shapeDimension.x = event.offsetX;
-      this.currentActiveShapeInfo.coordinates.shapeDimension.y = shapeInfo.height - event.offsetY;
-      this.currentActiveShapeInfo.coordinates.mouse.x = event.clientX;
-      this.currentActiveShapeInfo.coordinates.mouse.y = shapeInfo.top + 2 * shapeInfo.height - event.offsetY;
+      this.currentActiveShapeInfo.coordinates.shapeDimension.x = parseInt(event.offsetX);
+      this.currentActiveShapeInfo.coordinates.shapeDimension.y = parseInt(shapeInfo.height - event.offsetY);
+      this.currentActiveShapeInfo.coordinates.mouse.x = parseInt(event.clientX);
+      this.currentActiveShapeInfo.coordinates.mouse.y = parseInt(shapeInfo.top + (2 * shapeInfo.height) - event.offsetY);
     },
     showNewShapeModal() {
       if (!this.isNewShapeModalVisible) {

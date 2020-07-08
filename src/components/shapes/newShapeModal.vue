@@ -9,7 +9,7 @@
                 style="margin: 10px 0">
                 <input
                     :placeholder="newShapeForm[shapeConfiguration].placeholder" 
-                    v-model="newShapeForm[shapeConfiguration].value"
+                    v-model.number="newShapeForm[shapeConfiguration].value"
                     :type="newShapeForm[shapeConfiguration].type"/>
             </div>
             <div>
@@ -69,13 +69,17 @@ export default {
     },
     methods: {
         onShapeAddition() {
-            const shapeData = {};
-            const shapeConfigurationKeys = Object.keys(this.newShapeForm);
-            for (let i = 0; i < shapeConfigurationKeys.length; i += 1) {
-                shapeData[shapeConfigurationKeys[i]] = this.newShapeForm[shapeConfigurationKeys[i]].value;
-            }
-            this.$emit('onShapeAddition', shapeData);
+            const shapeFormValues = this.getShapeFormValues(this.newShapeForm);
+            this.$emit('onShapeAddition', shapeFormValues);
             this.onShapeModalClose();
+        },
+        getShapeFormValues(form) {
+            const shapeFormConfigurationKeyValue = {};
+            const shapeConfigurationKeys = Object.keys(form);
+            for (let i = 0; i < shapeConfigurationKeys.length; i += 1) {
+                shapeFormConfigurationKeyValue[shapeConfigurationKeys[i]] = form[shapeConfigurationKeys[i]].value;
+            }
+            return shapeFormConfigurationKeyValue;
         },
         onShapeModalClose() {
             this.$emit('update:isNewShapeModalVisible', false);
